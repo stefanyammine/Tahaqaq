@@ -1,0 +1,30 @@
+/* Scene 10-team (prefix p-). */
+[data-scene="10-team"] .p-values { display: grid; gap: var(--s3); margin-block-start: var(--s6); }
+[data-scene="10-team"] .p-values li {
+  padding-inline-start: clamp(14px, 1.4vw, 22px); border-inline-start: 2px solid var(--on-night-3);
+  font-family: var(--ff-display); font-style: italic; font-size: var(--fs-d3); line-height: 1.25; color: var(--on-night);
+}
+[data-scene="10-team"] .p-members { display: grid; gap: var(--s4); }
+[data-scene="10-team"] .p-member {
+  display: flex; align-items: center; gap: var(--s5); padding: var(--s5) var(--s6);
+  border: 1px solid var(--hair-night-2); border-radius: 14px; background: rgba(255,255,255,.02);
+}
+[data-scene="10-team"] .p-member__i {
+  flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
+  border: 1px solid var(--hair-night-2); color: var(--on-night-2);
+}
+[data-scene="10-team"] .p-member__i svg { width: 30px; height: 30px; }
+[data-scene="10-team"] .p-member__n { margin-block-end: 4px; font-family: var(--ff-display); font-size: var(--fs-d3); line-height: 1.15; color: var(--on-night); }
+[data-scene="10-team"] .p-event { display: flex; align-items: center; gap: var(--s4); margin-block-start: var(--s5); }
+[data-scene="10-team"] .p-event img { flex: none; width: 40px; height: 40px; border-radius: 10px; }
+[data-scene="10-team"] .p-event__t { font-family: var(--ff-label); font-size: var(--fs-label); letter-spacing: var(--track-label); text-transform: var(--label-case); color: var(--on-night-2); }
+[data-scene="10-team"] .p-event__c { margin-block-start: 4px; font-size: var(--fs-small); color: var(--on-night-3); }
+
+@media (max-width: 800px) {
+  [data-scene="10-team"] .p-values { margin-block-start: var(--s4); }
+  [data-scene="10-team"] .p-values li { font-size: 19px; }
+  [data-scene="10-team"] .p-member { padding: 14px 16px; gap: var(--s4); }
+  [data-scene="10-team"] .p-member__i { width: 48px; height: 48px; }
+  [data-scene="10-team"] .p-member__i svg { width: 22px; height: 22px; }
+  [data-scene="10-team"] .p-member__n { font-size: 20px; }
+}

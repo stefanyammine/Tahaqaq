@@ -1,0 +1,13 @@
+/* Motion rules shared by every file.
+   - Only transform and opacity animate (GSAP and CSS).
+   - CSS keyframe loops (hint line, call rings, scene ambient loops) stop under reduced motion.
+   - Engine adds .is-reduced on <html> when the OS asks for reduced motion (or ?motion=reduced). */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+}
+.is-reduced *, .is-reduced *::before, .is-reduced *::after {
+  animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important;
+}
+/* while the scroll engine is scrubbing, CSS hover transitions on big layers are not needed */
+.tq-word { will-change: opacity; }

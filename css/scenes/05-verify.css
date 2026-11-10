@@ -1,0 +1,50 @@
+/* Scene 05-verify (verify outside the chat). Scoped to [data-scene="05-verify"]; prefix f-. */
+
+[data-scene="05-verify"] .tq-title { font-size: var(--fs-d3); }
+[data-scene="05-verify"] .f-flows { display: grid; gap: var(--s4); margin-block-start: var(--s5); }
+[data-scene="05-verify"] .f-flow__l { margin-block-end: 6px; }
+[data-scene="05-verify"] .f-flow .tq-step { padding: 10px 12px; }
+[data-scene="05-verify"] .f-flow .tq-step__t { font-size: clamp(15px, 1.15vw, 20px); }
+[data-scene="05-verify"] .f-flow--today .tq-step:last-child { border-color: var(--red); }
+[data-scene="05-verify"] .f-flow--with .tq-step:last-child { border-color: var(--on-night); background: var(--night-3); }
+[data-scene="05-verify"] .f-why { margin-block-start: var(--s5); padding-block-start: var(--s4); border-block-start: 1px solid var(--hair-night); display: grid; gap: 6px; }
+[data-scene="05-verify"] .f-why__p { font-size: var(--fs-small); line-height: 1.45; color: var(--on-night-2); }
+[data-scene="05-verify"] .f-emerg { margin-block-start: 4px; font-family: var(--ff-display); font-style: italic; font-size: var(--fs-small); line-height: 1.4; color: var(--on-night); }
+
+[data-scene="05-verify"] .f-stage { max-width: 520px; margin-inline: auto; }
+[data-scene="05-verify"] .f-window .tq-window__body { padding: 0; }
+[data-scene="05-verify"] .f-sample { margin-block-start: var(--s3); text-align: center; }
+[data-scene="05-verify"] .f-call { background: #EEE8D9; padding: clamp(24px, 4vh, 44px) 24px 22px; display: grid; justify-items: center; gap: 14px; }
+[data-scene="05-verify"] .f-btnwrap { position: relative; width: 100%; max-width: 400px; }
+[data-scene="05-verify"] .f-ring { position: absolute; inset: 0; border-radius: 22px; border: 2px solid var(--ink); opacity: 0; }
+[data-scene="05-verify"] .f-btn {
+  position: relative; display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 22px 24px; border-radius: 22px; background: var(--ink); color: var(--paper);
+  font-family: var(--ff-display); font-size: clamp(19px, 1.6vw, 26px); line-height: 1.2; text-align: start;
+  box-shadow: 0 14px 28px -16px rgba(20,18,16,.8);
+}
+[data-scene="05-verify"] .f-btn svg { flex: none; width: 34px; height: 34px; padding: 8px; border-radius: 50%; background: var(--paper); color: var(--ink); box-sizing: content-box; width: 18px; height: 18px; }
+[data-scene="05-verify"] .f-note { font-family: var(--ff-label); font-size: var(--fs-label); letter-spacing: .02em; color: var(--red); text-align: center; }
+[data-scene="05-verify"] .f-helper {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--r-pill);
+  border: 1px solid rgba(20,18,16,.3); background: var(--paper); font-size: var(--fs-small); color: var(--ink-2);
+}
+[data-scene="05-verify"] .f-helper svg { width: 15px; height: 15px; color: var(--ink-3); }
+[data-scene="05-verify"] .f-out { padding: 16px 24px 20px; border-block-start: 1px solid rgba(20,18,16,.12); }
+[data-scene="05-verify"] .f-out__l { margin-block-end: 8px; }
+[data-scene="05-verify"] .f-out__row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 800px) {
+  [data-scene="05-verify"] .f-flows { gap: 8px; margin-block-start: 12px; }
+  [data-scene="05-verify"] .f-flow .tq-steps { flex-direction: row; }
+  [data-scene="05-verify"] .f-flow .tq-steps__arrow { transform: none; height: auto; width: 16px; }
+  [data-scene="05-verify"] .f-flow .tq-step { padding: 8px; }
+  [data-scene="05-verify"] .f-flow .tq-step__t { font-size: 13.5px; }
+  [data-scene="05-verify"] .f-why { margin-block-start: 12px; padding-block-start: 10px; gap: 4px; }
+  [data-scene="05-verify"] .f-why__p, [data-scene="05-verify"] .f-emerg { font-size: 12.5px; line-height: 1.35; }
+  [data-scene="05-verify"] .f-stage { max-width: none; }
+  [data-scene="05-verify"] .f-call { padding: 18px 14px 14px; gap: 10px; }
+  [data-scene="05-verify"] .f-btn { padding: 14px 16px; font-size: 17px; }
+  [data-scene="05-verify"] .f-out { padding: 10px 14px 12px; }
+  [data-scene="05-verify"] .f-sample { margin-block-start: 6px; }
+}

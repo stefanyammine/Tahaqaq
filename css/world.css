@@ -1,0 +1,124 @@
+/* Inside the computer: the CRT world, the scene rail, the scene slots, page-turn curtain. */
+
+.world {
+  position: absolute; inset: 0; z-index: var(--z-world);
+  background: var(--night); color: var(--on-night);
+  visibility: hidden; opacity: 0;
+  overflow: hidden;
+}
+/* ambient glows: one per tint; the engine crossfades their opacity */
+.world__glow {
+  position: absolute; inset: -20%; pointer-events: none; opacity: 0;
+}
+.world__glow--base  { opacity: 1; background: radial-gradient(60% 55% at 62% 48%, rgba(120, 80, 50, .16), rgba(0,0,0,0) 70%); }
+.world__glow--red   { background: radial-gradient(55% 50% at 66% 50%, rgba(225, 5, 57, .14), rgba(0,0,0,0) 70%); }
+.world__glow--peach { background: radial-gradient(50% 50% at 68% 52%, rgba(245, 158, 117, .17), rgba(0,0,0,0) 70%); }
+.world__glow--purple{ background: radial-gradient(50% 50% at 68% 52%, rgba(194, 136, 198, .17), rgba(0,0,0,0) 70%); }
+.world__glow--green { background: radial-gradient(50% 50% at 68% 52%, rgba(165, 167, 108, .17), rgba(0,0,0,0) 70%); }
+
+.world__scan { /* scanlines + vignette + faint glass curvature, static */
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background:
+    repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.09) 2px 3px),
+    radial-gradient(140% 120% at 50% 45%, rgba(0,0,0,0) 58%, rgba(0,0,0,.55) 100%);
+}
+.world__scan::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(60% 40% at 18% 6%, rgba(255,255,255,.035), rgba(255,255,255,0) 70%);
+}
+
+/* Frame: rail | scenes */
+.world__frame {
+  position: absolute; inset: var(--bar-h) 0 var(--foot-h) 0;
+  display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
+}
+
+/* ---------- Rail ---------- */
+.rail {
+  position: relative; z-index: 6;
+  padding: var(--s5) 0 var(--s5) var(--gutter);
+  padding-inline: var(--gutter) 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.rail__list { position: relative; display: flex; flex-direction: column; gap: 2px; }
+.rail__list::before { /* the track line */
+  content: ""; position: absolute; inset-block: 14px; inset-inline-start: 4px; width: 1px; background: var(--hair-night);
+}
+.rail__item {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  min-height: 28px; padding-inline-end: 8px; text-align: start;
+  font-family: var(--ff-label); font-size: var(--fs-label); line-height: 1.25;
+  color: var(--on-night-3);
+  transition: color var(--dur) ease;
+}
+.rail__dot {
+  flex: none; width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid var(--on-night-3); background: var(--night);
+  transition: transform var(--dur) var(--ease-out), background-color var(--dur) ease, border-color var(--dur) ease;
+}
+.rail__num { flex: none; font-family: var(--font-mono); width: 2.2ch; opacity: .8; }
+.rail__label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rail__item:hover { color: var(--on-night); }
+.rail__item.is-past .rail__dot { background: var(--on-night-3); border-color: transparent; }
+.rail__item[aria-current="step"] { color: var(--on-night); }
+.rail__item[aria-current="step"] .rail__dot { background: var(--red-hi); border-color: var(--red-hi); transform: scale(1.35); box-shadow: 0 0 0 4px rgba(246,31,65,.18); }
+
+/* ---------- Scenes ---------- */
+.scenes { position: relative; min-width: 0; min-height: 0; height: 100%; }
+.scene {
+  position: absolute; inset: 0;
+  visibility: hidden; opacity: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--s5) var(--gutter);
+  padding-inline-start: clamp(16px, 2.4vw, 48px);
+}
+/* Engine-owned wrapper: scales the scene down if its content is taller than the slot. */
+.scene__fit {
+  width: 100%; max-width: 1240px;
+  transform: scale(var(--fit, 1)); transform-origin: 50% 50%;
+}
+.scene[data-tint="peach"]  { --tint: var(--peach);  --tint-rgb: 245, 158, 117; }
+.scene[data-tint="purple"] { --tint: var(--purple); --tint-rgb: 194, 136, 198; }
+.scene[data-tint="green"]  { --tint: var(--green);  --tint-rgb: 165, 167, 108; }
+.scene[data-tint="red"]    { --tint: var(--red-hi); --tint-rgb: 246, 31, 65; }
+
+/* Page-turn curtain: a panel that slides across the glass (transform only). */
+.curtain {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: var(--night-2);
+  transform: translateX(-101%);
+  visibility: hidden;
+}
+.curtain::after { /* leading edge: a thin cream rule */
+  content: ""; position: absolute; inset-block: 0; inset-inline-end: 0; width: 1px; background: var(--hair-night-2);
+}
+
+/* ---------- Footer line ---------- */
+.world__foot {
+  position: absolute; inset-inline: 0; inset-block-end: 0; height: var(--foot-h); z-index: 6;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-inline: var(--gutter);
+  border-block-start: 1px solid var(--hair-night);
+  font-family: var(--ff-label); font-size: var(--fs-micro); color: var(--on-night-3);
+}
+.world__count { font-family: var(--font-mono); }
+.world__keys { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); }
+.world__keys kbd {
+  display: inline-grid; place-items: center; min-width: 22px; height: 20px; padding: 0 5px;
+  border: 1px solid var(--hair-night-2); border-radius: 4px; font: inherit; font-size: 11px; color: var(--on-night-2);
+}
+.world__progress { position: relative; flex: 1; max-width: 280px; height: 1px; background: var(--hair-night); margin-inline: var(--s5); }
+.world__progress i { position: absolute; inset: 0; background: var(--on-night-2); transform-origin: left center; transform: scaleX(0); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+  .world__frame { grid-template-columns: minmax(0, 1fr); inset-block-start: calc(var(--bar-h) + 28px); }
+  .rail { position: absolute; inset-block-start: -30px; inset-inline: 0; padding: 0 var(--gutter); height: 28px; }
+  .rail__list { flex-direction: row; justify-content: space-between; gap: 0; }
+  .rail__list::before { inset-block: 50%; inset-inline: 10px; width: auto; height: 1px; }
+  .rail__item { min-height: 28px; min-width: 24px; justify-content: center; padding: 0; }
+  .rail__num, .rail__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .scene { padding: 12px var(--gutter); align-items: center; }
+  .world__keys { display: none; }
+  .world__progress { margin-inline: 0; max-width: none; }
+}

@@ -1,0 +1,84 @@
+/* Base: reset, page, top bar, focus, utilities. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html {
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: auto; /* GSAP owns smooth scrolling */
+}
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+em, i { font-style: italic; }
+
+/* The scroll track gives the page its height; the stage itself is fixed. */
+.track { position: relative; width: 1px; pointer-events: none; }
+.stage { position: fixed; inset: 0; overflow: hidden; }
+
+/* Accessibility */
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--red-hi);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+.skip {
+  position: fixed; inset-block-start: 8px; inset-inline-start: 8px; z-index: var(--z-skip);
+  padding: 8px 14px; background: var(--ink); color: var(--cream); border-radius: var(--r-md);
+  font-family: var(--ff-label); font-size: var(--fs-label);
+  transform: translateY(-160%);
+}
+.skip:focus-visible { transform: none; }
+
+/* ---------- Top bar (shared by the opening view and the world) ---------- */
+.topbar {
+  position: fixed; inset-block-start: 0; inset-inline: 0; z-index: var(--z-bar);
+  height: var(--bar-h);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s5);
+  padding-inline: var(--gutter);
+  pointer-events: none;
+}
+.topbar > * { pointer-events: auto; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand__logo { width: 28px; height: 28px; border-radius: 7px; }
+.brand__name {
+  font-family: var(--ff-display); font-size: 21px; font-style: italic; letter-spacing: -.01em;
+}
+.topbar__end { display: flex; align-items: center; gap: var(--s5); }
+.topbar__step {
+  font-family: var(--ff-label); font-size: var(--fs-label); letter-spacing: var(--track-label);
+  text-transform: var(--label-case); color: var(--on-night-2); white-space: nowrap;
+  display: none;
+}
+
+/* Inside mode: the engine sets data-mode="inside" on <html> once the glass covers the screen */
+:root[data-mode="inside"] .topbar { color: var(--on-night); }
+/* Step headers ("01-02 · The hook") are intentionally hidden. */
+:root[data-mode="inside"] .topbar__step { display: none; }
+
+/* No-JS / failed-JS: show the opening view only, no scroll track */
+.no-js .world, .no-js .track { display: none; }
+
+@media (max-width: 800px) {
+  .brand__name { font-size: 19px; }
+  .topbar__step { display: none !important; }
+}

@@ -1,0 +1,33 @@
+/* Scene 12-close. Lives on the cream opening view (ink colours). Scoped to [data-scene="12-close"]; prefix c-. */
+
+[data-scene="12-close"] { opacity: 0; visibility: hidden; }
+[data-scene="12-close"] .c-step {
+  font-family: var(--ff-label); font-size: var(--fs-label); letter-spacing: var(--track-label);
+  text-transform: var(--label-case); color: var(--ink-3);
+}
+[data-scene="12-close"] .c-title {
+  margin-block-start: var(--s4);
+  font-family: var(--ff-display); font-weight: 400; color: var(--ink);
+  font-size: clamp(34px, 3.6vw, 64px); line-height: 1.08; letter-spacing: -.02em;
+  max-width: 15em; text-wrap: balance;
+}
+[data-scene="12-close"] .c-title__b {
+  display: block; margin-block-start: .08em;
+  font-style: italic; font-size: 1.9em; line-height: .95; letter-spacing: -.03em;
+}
+
+[data-scene="12-close"] .c-cast { display: flex; align-items: flex-end; gap: clamp(10px, 1.2vw, 18px); margin-block-start: clamp(20px, 3.4vh, 36px); }
+[data-scene="12-close"] .c-cast__item { display: block; }
+[data-scene="12-close"] .c-cast__item img { height: clamp(56px, 7.4vh, 84px); width: auto; filter: drop-shadow(0 8px 10px rgba(60,40,20,.22)); }
+[data-scene="12-close"] .c-cast__item--logo img {
+  height: clamp(48px, 6.2vh, 68px); border-radius: 22%; padding: 3px; background: var(--paper);
+  box-shadow: 0 8px 16px -8px rgba(40,30,20,.45);
+}
+[data-scene="12-close"] .c-status { margin-block-start: clamp(18px, 3vh, 30px); max-width: 30em; font-size: var(--fs-body); line-height: 1.5; color: var(--ink-2); }
+[data-scene="12-close"] .c-fine { margin-block-start: var(--s4); font-family: var(--ff-label); font-size: var(--fs-micro); line-height: 1.7; color: var(--ink-3); }
+
+@media (max-width: 800px) {
+  [data-scene="12-close"] .c-title { font-size: 28px; }
+  [data-scene="12-close"] .c-cast__item img { height: 48px; }
+  [data-scene="12-close"] .c-status { font-size: 15px; }
+}

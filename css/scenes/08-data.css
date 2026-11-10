@@ -1,0 +1,38 @@
+/* Scene 08-data (prefix d-). */
+[data-scene="08-data"] .d-layout { align-items: start; }
+[data-scene="08-data"] .d-rule {
+  display: flex; gap: 10px; align-items: flex-start; margin-block-start: var(--s5);
+  font-family: var(--ff-display); font-style: italic; font-size: var(--fs-lead); line-height: 1.35; color: var(--on-night);
+}
+[data-scene="08-data"] .d-rule svg { flex: none; width: 18px; height: 18px; margin-top: 6px; color: var(--on-night-3); }
+[data-scene="08-data"] .d-not { margin-block-start: var(--s6); padding-block-start: var(--s3); border-block-start: 1px solid var(--hair-night); }
+[data-scene="08-data"] .d-nots { display: grid; gap: var(--s4); margin-block-start: var(--s3); }
+[data-scene="08-data"] .d-nots li { display: grid; gap: 6px; justify-items: start; }
+[data-scene="08-data"] .d-nots__t { font-size: var(--fs-small); color: var(--on-night); }
+[data-scene="08-data"] .d-nots__l { font-family: var(--ff-label); font-size: var(--fs-micro); color: var(--on-night-3); }
+[data-scene="08-data"] .d-not .tq-tag { border: 1px dotted var(--on-night-3); background: transparent; }
+[data-scene="08-data"] .d-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); margin-block-start: var(--s3); }
+[data-scene="08-data"] .d-card {
+  display: grid; gap: 4px; align-content: start; padding: 12px 14px;
+  border: 1px solid var(--hair-night-2); border-radius: 10px; background: rgba(255,255,255,.02);
+}
+[data-scene="08-data"] .d-card__t { font-family: var(--ff-display); font-size: clamp(16px, 1.2vw, 21px); line-height: 1.2; color: var(--on-night); }
+[data-scene="08-data"] .d-card__n { font-size: var(--fs-micro); font-family: var(--ff-label); line-height: 1.4; color: var(--on-night-2); }
+[data-scene="08-data"] .d-card__l { font-size: var(--fs-micro); font-family: var(--ff-label); line-height: 1.4; color: var(--on-night-3); }
+[data-scene="08-data"] .d-ask { margin-block-start: var(--s5); padding-block-start: var(--s3); border-block-start: 1px solid var(--hair-night); }
+[data-scene="08-data"] .d-asklist { margin-block-start: var(--s3); gap: 6px; }
+[data-scene="08-data"] .d-asklist li { font-size: var(--fs-micro); font-family: var(--ff-label); line-height: 1.4; }
+[data-scene="08-data"] .d-asklist li > svg { width: 12px; height: 12px; margin-top: 2px; }
+
+@media (max-width: 800px) {
+  [data-scene="08-data"] .d-rule { margin-block-start: var(--s3); font-size: 15px; }
+  /* Not connected stays visible on phones (honest status), in a compact form */
+  [data-scene="08-data"] .d-not { margin-block-start: var(--s3); padding-block-start: 8px; }
+  [data-scene="08-data"] .d-nots { gap: 6px; margin-block-start: 6px; }
+  [data-scene="08-data"] .d-nots li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+  [data-scene="08-data"] .d-nots__t { font-size: 14px; }
+  [data-scene="08-data"] .d-nots__l { display: none; }
+  [data-scene="08-data"] .d-cards { grid-template-columns: 1fr; gap: 8px; }
+  [data-scene="08-data"] .d-card { padding: 8px 12px; }
+  [data-scene="08-data"] .d-card__n { display: none; }
+}
