@@ -66,6 +66,7 @@
 .hero__rig { grid-area: rig; display: flex; justify-content: center; align-items: center; min-width: 0; }
 .rig {
   position: relative; width: min(100%, 70vh, 700px); aspect-ratio: 1 / 1;
+  width: min(100%, 70dvh, 700px);
   transform-origin: 50% 50%;
 }
 .rig__float { position: absolute; inset: 0; }
@@ -192,4 +193,15 @@
 }
 @media (max-width: 800px) and (max-height: 700px) {
   .facts { display: none; }
+}
+
+/* ---------- Short, wide screens (phone held sideways): keep the opening view on one screen ---------- */
+@media (max-height: 520px) and (min-width: 801px) {
+  .hero__grid { padding-block: var(--bar-h) 10px; }
+  .hero__promise { margin-block-start: 10px; line-height: 1.35; }
+  .hero__cta-row { margin-block-start: 14px; }
+  .btn { min-height: 44px; padding: 0 22px; }
+  .facts { display: none; }
+  .hero__hint { display: none; }
+  .rig { width: min(100%, 64dvh, 700px); }
 }

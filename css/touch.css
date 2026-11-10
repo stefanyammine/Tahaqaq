@@ -1,0 +1,48 @@
+/* Touch devices (phones, tablets). Loaded after the other base styles; nothing here applies to a mouse-and-keyboard desktop
+   except the two rules that are hidden by default. */
+
+/* A scene taller than its slot scrolls inside its own box (the engine sets data-scroll on touch devices only). */
+.scene__fit[data-scroll] {
+  max-height: var(--fit-h); overflow-y: auto; overflow-x: hidden;
+  overscroll-behavior-y: auto; touch-action: pan-y; scrollbar-width: none;
+}
+.scene__fit[data-scroll]::-webkit-scrollbar { display: none; }
+
+/* Swipe hint instead of the keyboard hint, previous / next buttons instead of the arrow-key glyphs */
+.hint-touch, .world__nav { display: none; }
+
+@media (pointer: coarse) {
+  html { overscroll-behavior-y: none; -webkit-tap-highlight-color: transparent; }
+  button, [data-goto] { touch-action: manipulation; }
+  .brand { min-width: 44px; min-height: 44px; justify-content: center; margin-inline-start: -8px; }
+
+  .hint-key, .world__keys { display: none; }
+  .hint-touch { display: inline; }
+  .world__nav { display: flex; align-items: center; gap: 4px; margin-inline-start: -10px; }
+  .navbtn {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+    color: var(--on-night-2);
+  }
+  .navbtn:active { background: var(--night-3); color: var(--on-night); }
+  .navbtn svg { width: 20px; height: 20px; }
+}
+
+/* Small phone in portrait: show the swipe hint and give the computer a little less height to make room for it */
+@media (pointer: coarse) and (max-width: 800px) {
+  .hero__hint { display: flex; inset-block-end: calc(8px + env(safe-area-inset-bottom, 0px)); }
+  .hero__grid { padding-block-end: calc(36px + env(safe-area-inset-bottom, 0px)); }
+  .rig { max-height: 296px; }
+}
+/* Phone held sideways: no room for the hint */
+@media (pointer: coarse) and (max-height: 520px) and (min-width: 801px) {
+  .hero__hint { display: none; }
+}
+
+/* The dot row cannot hold thirteen 44px buttons, so on small touch screens it only shows progress
+   (swipe, or use the previous / next buttons). Large touch screens keep a tappable rail. */
+@media (pointer: coarse) and (max-width: 800px), (pointer: coarse) and (max-height: 520px) {
+  .rail__item { pointer-events: none; }
+}
+@media (pointer: coarse) and (min-width: 801px) and (min-height: 521px) {
+  .rail__item { min-height: 44px; }
+}

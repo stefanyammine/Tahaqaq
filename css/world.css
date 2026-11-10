@@ -98,6 +98,7 @@
   position: absolute; inset-inline: 0; inset-block-end: 0; height: var(--foot-h); z-index: 6;
   display: flex; align-items: center; justify-content: space-between;
   padding-inline: var(--gutter);
+  padding-block-end: env(safe-area-inset-bottom, 0px);
   border-block-start: 1px solid var(--hair-night);
   font-family: var(--ff-label); font-size: var(--fs-micro); color: var(--on-night-3);
 }
@@ -121,4 +122,16 @@
   .scene { padding: 12px var(--gutter); align-items: center; }
   .world__keys { display: none; }
   .world__progress { margin-inline: 0; max-width: none; }
+}
+
+/* ---------- Short, wide screens (phone held sideways): the rail becomes a row of dots ---------- */
+@media (max-height: 520px) and (min-width: 801px) {
+  .world__frame { grid-template-columns: minmax(0, 1fr); inset-block-start: calc(var(--bar-h) + 24px); }
+  .rail { position: absolute; inset-block-start: -26px; inset-inline: 0; padding: 0 var(--gutter); height: 24px; }
+  .rail__list { flex-direction: row; justify-content: space-between; gap: 0; max-width: 560px; margin-inline: auto; }
+  .rail__list::before { inset-block: 50%; inset-inline: 10px; width: auto; height: 1px; }
+  .rail__item { min-height: 24px; min-width: 24px; justify-content: center; padding: 0; }
+  .rail__num, .rail__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .scene { padding: 8px var(--gutter); }
+  .world__keys { display: none; }
 }

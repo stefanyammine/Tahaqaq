@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr" class="no-js" data-mode="hero">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tahaqaq</title>
 <meta name="description" content="Tahaqaq: check the claim, then call a number the sender does not control. A two-day prototype, presented as an overview.">
 <meta name="color-scheme" content="light">
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="css/world.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/motion.css">
+<link rel="stylesheet" href="css/touch.css">
 <!-- scene styles: one file per scene, each scoped to its own scene -->
 <link rel="stylesheet" href="css/scenes/01-note.css">
 <link rel="stylesheet" href="css/scenes/02-text.css">
@@ -252,7 +253,7 @@
         </div>
       </div>
     </div>
-    <p class="hero__hint" aria-hidden="true"><i></i><span data-i18n="00-hero.scrollHint">Scroll or press ↓</span></p>
+    <p class="hero__hint" aria-hidden="true"><i></i><span class="hint-key" data-i18n="00-hero.scrollHint">Scroll or press ↓</span><span class="hint-touch">Swipe up</span></p>
   </section>
 
   <!-- Inside the computer -->
@@ -283,6 +284,10 @@
 
     <div class="world__foot">
       <span class="world__keys" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd></span>
+      <span class="world__nav">
+        <button type="button" class="navbtn" data-step="-1" aria-label="Previous scene"><svg aria-hidden="true" focusable="false" style="transform:rotate(180deg)"><use href="#i-arrow-down"></use></svg></button>
+        <button type="button" class="navbtn" data-step="1" aria-label="Next scene"><svg aria-hidden="true" focusable="false"><use href="#i-arrow-down"></use></svg></button>
+      </span>
       <span class="world__progress" aria-hidden="true"><i></i></span>
       <span class="world__count" aria-hidden="true"></span>
     </div>

@@ -118,13 +118,23 @@
 
   /* Scale a scene down when its content is taller/wider than its slot. */
   function fitScenes() {
+    var touch = window.matchMedia('(pointer: coarse)').matches;
     $$('.scene').forEach(function (sec) {
       var fit = $('.scene__fit', sec);
       fit.style.setProperty('--fit', 1);
+      fit.removeAttribute('data-scroll');
+      fit.style.removeProperty('--fit-h');
       var cs = getComputedStyle(sec);
       var availH = sec.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
       var availW = sec.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       var h = fit.scrollHeight, w = fit.scrollWidth;
+      if (touch) {
+        // Phones and tablets: never shrink the text. A scene taller than its slot scrolls inside its own box.
+        if (h > availH + 1) { fit.style.setProperty('--fit-h', Math.floor(availH) + 'px'); fit.setAttribute('data-scroll', ''); }
+        var fw = Math.min(1, availW / Math.max(1, w));
+        if (fw < 0.97) fit.style.setProperty('--fit', Math.max(0.55, fw).toFixed(3));
+        return;
+      }
       var f = Math.min(1, availH / Math.max(1, h), availW / Math.max(1, w));
       if (f < 1) fit.style.setProperty('--fit', Math.max(0.55, f).toFixed(3));
       if (f < 0.75) console.warn('[TQ] scene', sec.getAttribute('data-scene'), 'scaled to', f.toFixed(2), '- content too tall for the slot');
@@ -492,7 +502,9 @@
     document.addEventListener('keydown', onKey);
     document.addEventListener('click', function (e) {
       var g = e.target.closest('[data-goto]');
-      if (g) { e.preventDefault(); TQ.goTo(g.getAttribute('data-goto')); }
+      if (g) { e.preventDefault(); TQ.goTo(g.getAttribute('data-goto')); return; }
+      var s = e.target.closest('[data-step]');
+      if (s) { e.preventDefault(); goTo(stepIdx(+s.getAttribute('data-step'))); }
     });
 
     // Resize: rebuild at once (leading) and again when resizing stops (trailing).
